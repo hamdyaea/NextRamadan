@@ -13,13 +13,15 @@ app = Flask(__name__)
 def main():
     response = requests.get("https://nextramadan.herokuapp.com/static/ramadanlist.txt")
     data = response.text
-    date_list =  data.splitlines()
+    date_list_raw =  data.splitlines()
+
+    date_list = []    
     
-    for i in date_list:
+    for i in date_list_raw:
         i = str(i)
         i = datetime.datetime.strptime(i, "%Y-%m-%d").date()
         date_list.append(i)
-    
+
     now = datetime.date.today()
 
     date_list_notneg = []
