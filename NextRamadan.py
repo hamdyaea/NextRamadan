@@ -8,10 +8,13 @@ from flask import Flask, render_template, request
 import re
 
 app = Flask(__name__)
+
+@app.route("/")
 def main():
+    """
     with open("./static/ramadanlist.txt") as file:
         lines = file.readlines()
-
+ 
     date_list = []
 
     for i in lines:
@@ -19,7 +22,13 @@ def main():
         i = i.replace("\n", "")
         i = datetime.datetime.strptime(i, "%Y-%m-%d").date()
         date_list.append(i)
-
+    """
+    date_list = []
+    date_list_test = ["2022-08-10","2023-05-12"]
+    for i in date_list_test:
+        i = str(i)
+        i = datetime.datetime.strptime(i, "%Y-%m-%d").date()
+        date_list.append(i)
     now = datetime.date.today()
 
     date_list_notneg = []
@@ -44,4 +53,3 @@ def main():
     #closest_date and numdays are the needed variables
     return str(numdays)+str("     ")+str(closest_date)
 
-main()
