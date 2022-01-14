@@ -11,24 +11,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    """
-    with open("./static/ramadanlist.txt") as file:
-        lines = file.readlines()
- 
-    date_list = []
-
-    for i in lines:
-        i = str(i)
-        i = i.replace("\n", "")
-        i = datetime.datetime.strptime(i, "%Y-%m-%d").date()
-        date_list.append(i)
-    """
-    date_list = []
-    date_list_test = ["2022-08-10","2023-05-12"]
-    for i in date_list_test:
+    response = requests.get("https://nextramadan.herokuapp.com/static/ramadanlist.txt")
+    data = response.text
+    date_list =  data.splitlines()
+    
+    for i in date_list:
         i = str(i)
         i = datetime.datetime.strptime(i, "%Y-%m-%d").date()
         date_list.append(i)
+    
     now = datetime.date.today()
 
     date_list_notneg = []
