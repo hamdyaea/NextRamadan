@@ -7,7 +7,7 @@ import requests
 from flask import Flask, render_template, request
 import re
 
-
+app = Flask(__name__)
 def main():
     with open("./static/ramadanlist.txt") as file:
         lines = file.readlines()
@@ -42,6 +42,6 @@ def main():
 
     numdays = minimum[:-9]
     #closest_date and numdays are the needed variables
-
+    return str(numdays)+str("     ")+str(closest_date)
 
 main()
