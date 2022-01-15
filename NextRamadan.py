@@ -9,11 +9,11 @@ import re
 
 app = Flask(__name__,)
 
-@app.route('/.well-known/acme-challenge/BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0')
+@app.route('/.well-known/acme-challenge/QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I')
 def letsencrypt_check(challenge):
     challenge_response = {
-        "BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0":"BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0.dQSy-msKhnnIcLMYOa1UAj4I5sxJOMnaD4fKecX1Heg",
-        "BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0":"BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0.dQSy-msKhnnIcLMYOa1UAj4I5sxJOMnaD4fKecX1Heg"
+        "QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I":"QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I.dQSy-msKhnnIcLMYOa1UAj4I5sxJOMnaD4fKecX1Heg",
+        "QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I":"QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I.dQSy-msKhnnIcLMYOa1UAj4I5sxJOMnaD4fKecX1Heg"
     }
     return Response(challenge_response[challenge], mimetype='text/plain')
 
