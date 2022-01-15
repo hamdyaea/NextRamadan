@@ -9,7 +9,7 @@ import re
 
 app = Flask(__name__,)
 
-@app.route('/.well-known/acme-challenge/BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0')
+@app.route('/static/.well-known/acme-challenge/BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0')
 def letsencrypt_check(challenge):
     challenge_response = {
         "BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0":"BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0.dQSy-msKhnnIcLMYOa1UAj4I5sxJOMnaD4fKecX1Heg",
