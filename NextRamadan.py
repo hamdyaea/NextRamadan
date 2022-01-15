@@ -9,7 +9,7 @@ import re
 
 app = Flask(__name__,)
 
-@route('/.well-known/acme-challenge/<filename>')
+@route('/.well-known/acme-challenge/BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0')
 def wellknown(filename): 
     return static_file(filename, root='./static/.well-known/acme-challenge')
 
