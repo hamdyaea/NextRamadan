@@ -9,9 +9,9 @@ import re
 
 app = Flask(__name__,)
 
-@route('/.well-known/acme-challenge/BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0')
-def wellknown(BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0): 
-    return static_file(BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0, root='./static/.well-known/acme-challenge')
+#@route('/.well-known/acme-challenge/BK5uUSfFLM5O6NSg3k_kl2Ko78F201Bm2bjkuNad7q0')
+#def wellknown(filename): 
+#    return static_file(filename, root='./static/.well-known/acme-challenge')
 
 @app.route("/")
 def main():
