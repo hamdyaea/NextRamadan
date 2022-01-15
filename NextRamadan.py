@@ -9,14 +9,6 @@ import re
 
 app = Flask(__name__,)
 
-@app.route('/.well-known/acme-challenge/QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I')
-def letsencrypt_check(QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I):
-    challenge_response = {
-        "QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I":"QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I.dQSy-msKhnnIcLMYOa1UAj4I5sxJOMnaD4fKecX1Heg",
-        "QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I":"QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I.dQSy-msKhnnIcLMYOa1UAj4I5sxJOMnaD4fKecX1Heg"
-    }
-    return Response(challenge_response[QlPJCbe2eznS2E7X2_GtikODe5xGgjFJRR7VAAEoe0I], mimetype='text/plain')
-
 
 @app.route("/")
 def main():
