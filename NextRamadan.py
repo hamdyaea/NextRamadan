@@ -7,7 +7,11 @@ import requests
 from flask import Flask, render_template, request
 import re
 
-app = Flask(__name__)
+app = Flask(__name__,)
+
+@route('/.well-known/acme-challenge/<filename>')
+def wellknown(filename): 
+    return static_file(filename, root='./static/.well-known/acme-challenge')
 
 @app.route("/")
 def main():
