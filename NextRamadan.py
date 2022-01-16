@@ -46,4 +46,4 @@ def main():
     numdays = minimum[:-9]
     #closest_date and numdays are the needed variables
     #return str(numdays)+str("     ")+str(closest_date)
-    return render_template("index.html", numdays=numdays,closest_date=closest_date)
+    return render_template("index.html", numdays=numdays,closest_date=closest_date,now=now)
