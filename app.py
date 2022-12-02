@@ -12,7 +12,7 @@ app = Flask(__name__,)
 
 @app.route("/")
 def main():
-    response = requests.get("https://nextramadan.herokuapp.com/static/ramadanlist.txt")
+    response = requests.get("https://nextramadan.info/static/ramadanlist.txt")
     data = response.text
     date_list_raw =  data.splitlines()
 
