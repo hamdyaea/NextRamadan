@@ -10,7 +10,7 @@ from twython import Twython
 twitter = Twython(consumer_key, consumer_secret, access_token, access_token_secret)
 
 def main():
-    response = requests.get("https://nextramadan.herokuapp.com/static/ramadanlist.txt")
+    response = requests.get("https://www.nextramadan.info/static/ramadanlist.txt")
     data = response.text
     date_list_raw =  data.splitlines()
 
@@ -45,7 +45,7 @@ def main():
     #closest_date and numdays are the needed variables
     msg =  "The next Ramadan is in "+str(numdays)+str(" days the ")+str(closest_date)
     message = str(msg) + str("\n#Ramadan #Islam  #nextramadan.info")
-    photo = open("/var/www/html/ramadan.jpg", "rb")
+    photo = open("/var/www/NextRamadan/static/assets/images/ramadan.jpg", "rb")
     response = twitter.upload_media(media=photo)
     twitter.update_status(status=message, media_ids=[response["media_id"]])
 
