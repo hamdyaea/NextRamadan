@@ -4,13 +4,14 @@
 
 import datetime
 import requests
-from RamKeys import *
+import os
 from twython import Twython
 
-twitter = Twython(consumer_key, consumer_secret, access_token, access_token_secret)
+
 
 def main():
-    response = requests.get("https://www.nextramadan.info/static/ramadanlist.txt")
+    twitter = Twython(*(os.environ[key] for key in ("TWITTER_CONSUMER_KEY", "TWITTER_CONSUMER_SECRET", "TWITTER_ACCESS_TOKEN", "TWITTER_ACCESS_TOKEN_SECRET")))
+    response = requests.get("https://www.nextramadan.info/static/ramadanlist.txt", timeout=15)
     data = response.text
     date_list_raw =  data.splitlines()
 
@@ -49,4 +50,5 @@ def main():
     response = twitter.upload_media(media=photo)
     twitter.update_status(status=message, media_ids=[response["media_id"]])
 
-main()
+if __name__ == "__main__":
+    raise SystemExit("Posting disabled: review the expired calendar and publishing workflow first.")

@@ -1,1 +1,1 @@
-web gunicorn NextRamadan:app
+web: gunicorn app:app

@@ -1,52 +1,38 @@
 #!/usr/bin/env python3
-# Developer : Hamdy Abou El Anein
-# hamdy.aea@protonmail.com
-
-import datetime
-import requests
-from flask import Flask, render_template, request
-import re
-
-app = Flask(__name__,)
+# Developer: Hamdy Abou El Anein
+# Contact: hamdy.aea@protonmail.com
+"""Countdown based on a maintained local calendar; never invent missing dates."""
+from datetime import date
+from pathlib import Path
+from flask import Flask, render_template
 
 
-@app.route("/")
-def main():
-    response = requests.get("https://nextramadan.info/static/ramadanlist.txt")
-    data = response.text
-    date_list_raw =  data.splitlines()
+def next_ramadan(text, today):
+    dates = [date.fromisoformat(line.strip()) for line in text.splitlines() if line.strip()]
+    upcoming = [value for value in dates if value >= today]
+    if not upcoming:
+        raise ValueError("Calendar has no upcoming Ramadan date; update the calendar.")
+    closest = min(upcoming)
+    return closest, (closest - today).days
 
-    date_list = []    
-    
-    for i in date_list_raw:
-        i = str(i)
-        i = datetime.datetime.strptime(i, "%Y-%m-%d").date()
-        date_list.append(i)
 
-    now = datetime.date.today()
+def create_app(calendar_path=None):
+    app = Flask(__name__)
+    app.config["CALENDAR_PATH"] = Path(calendar_path) if calendar_path else Path(__file__).resolve().parent / "static/ramadanlist.txt"
 
-    date_list_notneg = []
+    @app.get("/")
+    def index():
+        today = date.today()
+        try:
+            closest, days = next_ramadan(app.config["CALENDAR_PATH"].read_text(), today)
+        except (OSError, ValueError):
+            return "Calendar update required. Ramadan dates depend on local moon sighting.", 503
+        return render_template("index.html", numdays=days, closest_date=closest, now=today)
 
-    # Remove negatives dates
-    for i in date_list:
-        value = i - now
-        value = str(value)
-        if value[0] != "-":
-            date_list_notneg.append(i)
+    return app
 
-    differences = [abs(now - each_date) for each_date in date_list_notneg]
 
-    minimum = min(differences)
-
-    closest_date = date_list_notneg[differences.index(minimum)]
-
-    # Find the number of days between nom and the next ramadan
-    minimum = str(minimum)
-
-    numdays = minimum[:-9]
-    #closest_date and numdays are the needed variables
-    #return str(numdays)+str("     ")+str(closest_date)
-    return render_template("index.html", numdays=numdays,closest_date=closest_date,now=now)
+app = create_app()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
